@@ -22,8 +22,6 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nome</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Contato</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
                         @auth
                             <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Ações</th>
                         @endauth
@@ -37,8 +35,7 @@
                                     {{ $contact->name }}
                                 </a>
                             </td>
-                            <td class="px-6 py-4">{{ $contact->contact }}</td>
-                            <td class="px-6 py-4">{{ $contact->email }}</td>
+
                             @auth
                                 <td class="px-6 py-4 flex gap-2 justify-end">
                                     <a href="{{ route('contacts.edit', $contact) }}"
