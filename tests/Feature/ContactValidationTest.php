@@ -180,7 +180,9 @@ class ContactValidationTest extends TestCase
             'contact' => '123456789',
         ]);
 
-        $contact = Contact::factory()->create();
+        $contact = Contact::factory()->create([
+            'contact' => '987654321',
+        ]);
 
         $this->actingAsAdmin()
             ->put(route('contacts.update', $contact), [
@@ -204,19 +206,21 @@ class ContactValidationTest extends TestCase
             ->assertSessionHasErrors('email');
     }
 
-        public function test_update_email_must_be_unique(): void
+    public function test_update_email_must_be_unique(): void
     {    
         Contact::factory()->create([
-            'email' => 'teste@teste.com',
+            'email' => 'teste1@teste.com',
         ]);
 
-        $contact = Contact::factory()->create();
+        $contact = Contact::factory()->create([
+            'email' => 'teste2@teste.com',
+        ]);
 
         $this->actingAsAdmin()
             ->put(route('contacts.update', $contact), [
                 'name' => 'Outro Nome',
                 'contact' => '123456789',
-                'email' => 'teste@teste.com', // Deve falhar pois o email já existe
+                'email' => 'teste1@teste.com', // Deve falhar pois o email já existe
             ])
             ->assertSessionHasErrors('email');
     }
